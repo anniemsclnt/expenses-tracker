@@ -1,62 +1,125 @@
+/* Import Feminine Font */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap');
+
+/* Body Background */
 body {
-  font-family: Arial, sans-serif;
-  background-color: white;
-  color: black;
-  padding: 20px;
-  text-align: center;
+  background-color: #f8e1f4; /* Soft pastel pink */
+  font-family: 'Playfair Display', serif; /* Feminine font */
+  color: #333; /* Dark text for readability */
+  margin: 0;
+  padding: 0;
 }
 
-h1 {
-  margin-bottom: 20px;
+/* Header */
+h1, h2, h3 {
+  color: #f29dc3; /* Soft pastel pink for headings */
+  text-align: center;
+  font-weight: 600;
+}
+
+/* Form and Inputs */
+input, select, button {
+  padding: 10px;
+  border-radius: 5px;
+  margin: 5px 0;
+}
+
+input[type="number"], input[type="text"], input[type="date"], select {
+  border: 1px solid #f1c6d6; /* Light pastel pink border */
+  background-color: #fff5f9; /* Very light pink background */
+  color: #333;
+  width: 100%; /* Make the inputs full width for better UX */
 }
 
 button {
-  margin: 10px;
-  padding: 12px 24px;
-  font-size: 16px;
+  background-color: #f0c1f1; /* Light pink background */
+  color: white;
+  border: none;
   cursor: pointer;
-}
-
-.tracker-container {
-  display: flex;
-  justify-content: space-around;
-  margin-top: 30px;
-  flex-wrap: wrap;
-}
-
-.summary-box, .form-box {
-  width: 45%;
-  padding: 20px;
-  border: 1px solid #aaa;
-  border-radius: 8px;
-  box-shadow: 0 0 10px #ccc;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-input {
-  padding: 10px;
-  font-size: 14px;
-}
-
-.highlight {
-  font-weight: bold;
-  background-color: #c6f7d0; /* pastel green */
-  padding: 4px 8px;
+  transition: background-color 0.3s;
+  width: 100%;
+  padding: 12px;
   border-radius: 5px;
 }
 
-ul {
-  list-style-type: none;
-  padding: 0;
-  margin-top: 20px;
-  text-align: left;
+button:hover {
+  background-color: #f5a0d3; /* Slightly darker pink on hover */
 }
 
-.summary-totals {
-  margin-top: 20px;
+/* Expense list items */
+li {
+  background-color: #ffffff; /* White background for expenses */
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #f1c6d6;
+  font-size: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Highlight Money Left in Pastel Green */
+.highlight {
+  background-color: #b8f7b4; /* Soft pastel green */
+  color: #333;
+  font-weight: bold;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+/* Input and Select Fields (for month and date) */
+input[type="date"], select {
+  background-color: #fef7f2; /* Very light peach background */
+  border: 1px solid #f8b8d3;
+}
+
+label {
+  font-size: 16px;
+  color: #f29dc3; /* Soft pastel pink */
+}
+
+/* Buttons for Edit and Delete */
+button:hover {
+  background-color: #f5a0d3; /* Slightly darker pink on hover */
+  color: white;
+}
+
+button:active {
+  background-color: #f58da1; /* Slightly darker pink when pressed */
+}
+
+/* Expense List */
+#expenseList {
+  padding: 0;
+  list-style: none;
+  max-height: 400px;
+  overflow-y: scroll;
+}
+
+/* Month Selector */
+select {
+  background-color: #e0f4f1; /* Light pastel teal */
+  color: #333;
+  font-size: 16px;
+  border: 1px solid #f1c6d6;
+}
+
+/* Salary and Total Display */
+#salaryDisplay, #totalDisplay, #moneyLeftDisplay {
+  font-size: 20px;
+  font-weight: bold;
+  color: #f29dc3;
+  padding: 10px;
+  margin: 10px 0;
+  text-align: center;
+}
+
+/* Highlight the money left */
+#moneyLeftDisplay {
+  background-color: #b8f7b4; /* Soft pastel green */
+  color: #333;
+  font-weight: bold;
+  padding: 5px;
+  border-radius: 5px;
 }
