@@ -1,49 +1,62 @@
-const form = document.getElementById("expenseForm");
+const expenseForm = document.getElementById("expenseForm");
 const categoryInput = document.getElementById("category");
 const amountInput = document.getElementById("amount");
+const tableBody = document.querySelector("#expenseTable tbody");
+const totalCell = document.getElementById("totalCell");
+
+const salaryInput = document.getElementById("salaryInput");
+const moneyLeftSpan = document.getElementById("moneyLeft");
 
 let expenses = JSON.parse(localStorage.getItem("expenses")) || [];
+let salary = parseFloat(localStorage.getItem("salary")) || 0;
 
-form.addEventListener("submit", function (e) {
+salaryInput.value = salary || "";
+
+function saveExpenses() {
+  localStorage.setItem("expenses", JSON.stringify(expenses));
+}
+
+function calculateTotal() {
+  let total = expenses.reduce((sum, item) => sum + item.amount, 0);
+  totalCell.textContent = `$${total.toFixed(2)}`;
+
+  let moneyLeft = salary - total;
+  moneyLeftSpan.textContent = moneyLeft.toFixed(2);
+
+  // Change colors based on savings/overspending
+  totalCell.className = "red";
+  moneyLeftSpan.parentElement.className = moneyLeft >= 0 ? "green" : "red";
+}
+
+function renderTable() {
+  tableBody.innerHTML = "";
+  expenses.forEach((item, index) => {
+    let row = document.createElement("tr");
+    row.innerHTML = `<td>${item.category}</td><td>$${item.amount.toFixed(2)}</td>`;
+    tableBody.appendChild(row);
+  });
+  calculateTotal();
+}
+
+expenseForm.addEventListener("submit", function (e) {
   e.preventDefault();
   const category = categoryInput.value;
   const amount = parseFloat(amountInput.value);
 
+  if (!category || isNaN(amount)) return;
+
   expenses.push({ category, amount });
-  localStorage.setItem("expenses", JSON.stringify(expenses));
   categoryInput.value = "";
   amountInput.value = "";
 
-  updateChart();
+  saveExpenses();
+  renderTable();
 });
 
-function updateChart() {
-  const totals = {};
-  expenses.forEach(exp => {
-    totals[exp.category] = (totals[exp.category] || 0) + exp.amount;
-  });
+salaryInput.addEventListener("change", function () {
+  salary = parseFloat(salaryInput.value) || 0;
+  localStorage.setItem("salary", salary);
+  calculateTotal();
+});
 
-  const labels = Object.keys(totals);
-  const data = Object.values(totals);
-
-  const ctx = document.getElementById("expenseChart").getContext("2d");
-  if (window.expenseChart) window.expenseChart.destroy(); // prevent double chart
-  window.expenseChart = new Chart(ctx, {
-    type: 'pie',
-    data: {
-      labels: labels,
-      datasets: [{
-        label: 'Expenses',
-        data: data,
-        backgroundColor: [
-          '#ff9999','#66b3ff','#99ff99','#ffcc99',
-          '#c2c2f0', '#ffb3e6', '#c2d6d6'
-        ]
-      }]
-    }
-  });
-}
-
-// Show the chart on load
-updateChart();
-
+renderTable();
