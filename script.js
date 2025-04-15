@@ -1,123 +1,78 @@
-const expenseForm = document.getElementById("expenseForm");
-const categoryInput = document.getElementById("categoryInput");
-const amountInput = document.getElementById("amountInput");
-const salaryInput = document.getElementById("salaryInput");
-const monthSelector = document.getElementById("monthSelector");
-const expenseList = document.getElementById("expenseList");
-
-const salaryDisplay = document.getElementById("salaryDisplay");
-const totalDisplay = document.getElementById("totalDisplay");
-const moneyLeftDisplay = document.getElementById("moneyLeftDisplay");
-
-let data = JSON.parse(localStorage.getItem("monthlyData")) || {};
-
-// Load selected month or default
-let currentMonth = monthSelector.value;
-
-// Format ₱
-function formatCurrency(value) {
-  return `₱${value.toLocaleString('en-PH', { minimumFractionDigits: 2 })}`;
-}
-
-// Save data to localStorage
-function saveData() {
-  localStorage.setItem("monthlyData", JSON.stringify(data));
-}
-
-// Render current month data
-function renderExpenses() {
-  const thisMonth = data[currentMonth] || { salary: 0, expenses: [] };
-  const expenses = thisMonth.expenses || [];
-  const salary = thisMonth.salary || 0;
-
-  expenseList.innerHTML = '';
-  expenses.forEach((item, index) => {
-    const li = document.createElement('li');
-    li.innerHTML = `
-      <span id="expenseText-${index}">
-        ${item.category}: ${formatCurrency(item.amount)}
-      </span>
-      <button onclick="editExpense(${index})" style="margin-left: 10px;">✏️ Edit</button>
-      <button onclick="deleteExpense(${index})" style="color: red;">🗑️ Delete</button>
-    `;
-    expenseList.appendChild(li);
+// Wait for the DOM to load before executing the script
+window.onload = function() {
+  // Line Chart - Monthly Spending Trend
+  var ctxLine = document.getElementById('lineChart').getContext('2d');
+  var lineChart = new Chart(ctxLine, {
+    type: 'line', // Line chart type
+    data: {
+      labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'], // X-axis labels (weeks in a month)
+      datasets: [{
+        label: 'Monthly Spending ($)',
+        data: [150, 200, 250, 300], // Example data for spending per week
+        backgroundColor: 'rgba(161, 217, 179, 0.2)', // Light pastel emerald
+        borderColor: 'rgba(161, 217, 179, 1)', // Pastel emerald border color
+        borderWidth: 2,
+        tension: 0.4, // Smooth lines
+        fill: true
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        title: {
+          display: true,
+          text: 'Spending Trend (This Month)',
+          font: {
+            size: 18
+          }
+        },
+        legend: {
+          display: false // Hide legend (since there's only one dataset)
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: {
+            stepSize: 50
+          }
+        }
+      }
+    }
   });
 
-  const total = expenses.reduce((sum, e) => sum + e.amount, 0);
-  const moneyLeft = salary - total;
-
-  salaryDisplay.textContent = formatCurrency(salary);
-  totalDisplay.textContent = formatCurrency(total);
-  moneyLeftDisplay.textContent = formatCurrency(moneyLeft);
-  moneyLeftDisplay.className = "highlight";
-}
-
-// Add new expense and salary
-expenseForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-  const category = categoryInput.value;
-  const amount = parseFloat(amountInput.value);
-
-  if (!category || isNaN(amount)) return;
-
-  if (!data[currentMonth]) data[currentMonth] = { salary: 0, expenses: [] };
-  const monthData = data[currentMonth];
-
-  // If salary input is provided, save it
-  if (salaryInput.value) {
-    monthData.salary = parseFloat(salaryInput.value);
-    salaryInput.value = "";
-  }
-
-  // Add new expense
-  monthData.expenses.push({ category, amount });
-
-  // Save and reset the form
-  categoryInput.value = "";
-  amountInput.value = "";
-  saveData();
-  renderExpenses();
-});
-
-// Delete an expense
-function deleteExpense(index) {
-  data[currentMonth].expenses.splice(index, 1);
-  saveData();
-  renderExpenses();
-}
-
-// Edit an expense
-function editExpense(index) {
-  const item = data[currentMonth].expenses[index];
-  const span = document.getElementById(`expenseText-${index}`);
-
-  span.innerHTML = `
-    <input type="text" id="editCategory-${index}" value="${item.category}" style="width: 100px;">
-    <input type="number" id="editAmount-${index}" value="${item.amount}" style="width: 80px;">
-    <button onclick="saveEdit(${index})" style="color: green;">💾 Save</button>
-  `;
-}
-
-// Save the edited expense
-function saveEdit(index) {
-  const newCategory = document.getElementById(`editCategory-${index}`).value;
-  const newAmount = parseFloat(document.getElementById(`editAmount-${index}`).value);
-
-  if (!newCategory || isNaN(newAmount)) {
-    alert("Enter valid data.");
-    return;
-  }
-
-  data[currentMonth].expenses[index] = { category: newCategory, amount: newAmount };
-  saveData();
-  renderExpenses();
-}
-
-// Change month event handler
-monthSelector.addEventListener("change", () => {
-  currentMonth = monthSelector.value;
-  renderExpenses();
-});
-
-// Initial render
-renderExpenses();
+  // Pie Chart - Expense Breakdown by Category
+  var ctxPie = document.getElementById('pieChart').getContext('2d');
+  var pieChart = new Chart(ctxPie, {
+    type: 'pie', // Pie chart type
+    data: {
+      labels: ['Food', 'Transport', 'Entertainment', 'Misc'], // Categories
+      datasets: [{
+        data: [300, 150, 100, 50], // Example data for each category
+        backgroundColor: [
+          'rgba(161, 217, 179, 0.8)', // Pastel emerald for food
+          'rgba(189, 154, 126, 0.8)', // Clay brown for transport
+          'rgba(236, 156, 145, 0.8)', // Light red for entertainment
+          'rgba(212, 180, 120, 0.8)' // Soft yellow for misc
+        ],
+        borderColor: '#fff', // White border for each segment
+        borderWidth: 1
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        title: {
+          display: true,
+          text: 'Expense Breakdown (This Month)',
+          font: {
+            size: 18
+          }
+        },
+        legend: {
+          position: 'top' // Position legend at the top
+        }
+      }
+    }
+  });
+};
