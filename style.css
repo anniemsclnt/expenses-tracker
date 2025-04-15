@@ -1,4 +1,4 @@
-/* Font + Base Setup */
+ko/* Font + Base Setup */
 body {
   font-family: 'Cormorant Garamond', serif;
   background-color: #F0FDF4;
@@ -97,3 +97,19 @@ h2 {
     font-size: 16px;
   }
 }
+/* 🌸 Center the header and buttons */
+.main-header {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.main-header h1 {
+  font-size: 3em;
+  color: #4BA88D;
+  margin-bottom: 10px;
+}
+
+.nav-buttons {
+  margin-bottom: 30px;
+}
+
