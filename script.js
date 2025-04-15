@@ -1,62 +1,59 @@
 const expenseForm = document.getElementById("expenseForm");
-const categoryInput = document.getElementById("category");
-const amountInput = document.getElementById("amount");
-const tableBody = document.querySelector("#expenseTable tbody");
-const totalCell = document.getElementById("totalCell");
-
+const categoryInput = document.getElementById("categoryInput");
+const amountInput = document.getElementById("amountInput");
 const salaryInput = document.getElementById("salaryInput");
-const moneyLeftSpan = document.getElementById("moneyLeft");
+const expenseList = document.getElementById("expenseList");
+
+const salaryDisplay = document.getElementById("salaryDisplay");
+const totalDisplay = document.getElementById("totalDisplay");
+const moneyLeftDisplay = document.getElementById("moneyLeftDisplay");
 
 let expenses = JSON.parse(localStorage.getItem("expenses")) || [];
 let salary = parseFloat(localStorage.getItem("salary")) || 0;
 
-salaryInput.value = salary || "";
-
-function saveExpenses() {
-  localStorage.setItem("expenses", JSON.stringify(expenses));
+function formatCurrency(value) {
+  return `₱${value.toLocaleString('en-PH', { minimumFractionDigits: 2 })}`;
 }
 
-function calculateTotal() {
-  let total = expenses.reduce((sum, item) => sum + item.amount, 0);
-  totalCell.textContent = `$${total.toFixed(2)}`;
+function updateSummary() {
+  const total = expenses.reduce((sum, item) => sum + item.amount, 0);
+  const moneyLeft = salary - total;
 
-  let moneyLeft = salary - total;
-  moneyLeftSpan.textContent = moneyLeft.toFixed(2);
-
-  // Change colors based on savings/overspending
-  totalCell.className = "red";
-  moneyLeftSpan.parentElement.className = moneyLeft >= 0 ? "green" : "red";
+  salaryDisplay.textContent = formatCurrency(salary);
+  totalDisplay.textContent = formatCurrency(total);
+  moneyLeftDisplay.textContent = formatCurrency(moneyLeft);
 }
 
-function renderTable() {
-  tableBody.innerHTML = "";
-  expenses.forEach((item, index) => {
-    let row = document.createElement("tr");
-    row.innerHTML = `<td>${item.category}</td><td>$${item.amount.toFixed(2)}</td>`;
-    tableBody.appendChild(row);
+function renderExpenses() {
+  expenseList.innerHTML = '';
+  expenses.forEach((item) => {
+    const li = document.createElement('li');
+    li.textContent = `${item.category}: ${formatCurrency(item.amount)}`;
+    expenseList.appendChild(li);
   });
-  calculateTotal();
+  updateSummary();
 }
 
-expenseForm.addEventListener("submit", function (e) {
+expenseForm.addEventListener("submit", (e) => {
   e.preventDefault();
   const category = categoryInput.value;
   const amount = parseFloat(amountInput.value);
 
+  if (salaryInput.value) {
+    salary = parseFloat(salaryInput.value);
+    localStorage.setItem("salary", salary);
+    salaryInput.value = "";
+  }
+
   if (!category || isNaN(amount)) return;
 
   expenses.push({ category, amount });
+  localStorage.setItem("expenses", JSON.stringify(expenses));
+
   categoryInput.value = "";
   amountInput.value = "";
 
-  saveExpenses();
-  renderTable();
+  renderExpenses();
 });
 
-salaryInput.addEventListener("change", function () {
-  salary = parseFloat(salaryInput.value) || 0;
-  localStorage.setItem("salary", salary);
-  calculateTotal();
-});
-
-renderTable();
+renderExpenses();
