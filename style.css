@@ -5,6 +5,16 @@ body {
   color: #2E7D61;
   margin: 0;
   padding: 0;
+  text-align: center;
+}
+
+/* 🔔 Notification Bar */
+.notification-bar {
+  background-color: #D4F8E8;
+  color: #2E7D61;
+  padding: 12px;
+  font-size: 16px;
+  text-align: center;
 }
 
 /* 🌸 Main Header: Title at Top Center */
@@ -63,6 +73,14 @@ body {
   margin-bottom: 40px;
 }
 
+.graph-section h2,
+.pie-chart-section h2 {
+  text-align: center;
+  color: #4BA88D;
+  font-size: 1.8em;
+  margin-bottom: 10px;
+}
+
 .graph-placeholder,
 .chart-placeholder {
   background-color: #ffffff;
@@ -83,4 +101,22 @@ body {
   font-size: 20px;
   margin: 30px 0;
   text-align: center;
+}
+
+/* 📱 Responsive Design */
+@media (max-width: 768px) {
+  .main-header h1 {
+    font-size: 2em;
+  }
+
+  .nav-buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .graph-placeholder,
+  .chart-placeholder {
+    padding: 20px;
+    font-size: 16px;
+  }
 }
