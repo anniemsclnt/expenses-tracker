@@ -1,4 +1,4 @@
-/* Font + Base Setup */
+/* 🌿 Font + Base Setup */
 body {
   font-family: 'Cormorant Garamond', serif;
   background-color: #F0FDF4;
@@ -14,36 +14,37 @@ body {
   color: #2E7D61;
   padding: 12px;
   font-size: 16px;
-  text-align: center;
 }
 
-/* 🌸 Main Header: Title at Top Center */
+/* 🌸 Centered Header */
 .main-header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 30px;
-  margin-bottom: 20px;
+  margin: 30px auto 20px auto;
 }
 
+/* Title Text */
 .main-header h1 {
   font-size: 3em;
   color: #4BA88D;
   font-weight: 600;
   margin-bottom: 20px;
+  text-align: center;
 }
 
-/* 🌿 Navigation Buttons Below Title */
+/* Navigation Buttons */
 .nav-buttons {
   display: flex;
+  justify-content: center;
   gap: 15px;
   flex-wrap: wrap;
-  justify-content: center;
+  margin-bottom: 30px;
 }
 
 .nav-buttons button {
-  background-color: #C8F2CC; /* pastel green */
-  color: #1A1A1A; /* black text */
+  background-color: #C8F2CC;
+  color: #1A1A1A;
   padding: 12px 24px;
   border: none;
   border-radius: 10px;
@@ -53,34 +54,35 @@ body {
 }
 
 .nav-buttons button:hover {
-  background-color: #A8D5BA; /* softer green on hover */
+  background-color: #A8D5BA;
 }
 
-/* ✨ Dashboard Layout */
+/* 🌷 Dashboard Content */
 .dashboard {
   display: flex;
   flex-direction: column;
   align-items: center;
+  max-width: 900px;
+  margin: 0 auto;
   padding: 0 20px;
-  text-align: center;
 }
 
-/* 📊 Graph & Pie Chart Sections */
+/* 📊 Graph and Pie Chart Sections */
 .graph-section,
 .pie-chart-section {
   width: 100%;
-  max-width: 700px;
+  text-align: center;
   margin-bottom: 40px;
 }
 
 .graph-section h2,
 .pie-chart-section h2 {
-  text-align: center;
   color: #4BA88D;
   font-size: 1.8em;
   margin-bottom: 10px;
 }
 
+/* Chart Boxes */
 .graph-placeholder,
 .chart-placeholder {
   background-color: #ffffff;
@@ -106,7 +108,7 @@ body {
 /* 📱 Responsive Design */
 @media (max-width: 768px) {
   .main-header h1 {
-    font-size: 2em;
+    font-size: 2.2em;
   }
 
   .nav-buttons {
