@@ -1,15 +1,45 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>2025 Expenses</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2025 Expenses Tracker</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <h1>2025 Expenses</h1>
+  <!-- Notification Bar -->
+  <div class="notification-bar">
+    🔔 Reminder: You spent ₱4,200 on food this month. Consider reducing it next week 🍽️
+  </div>
 
-  <p>Manage your money, see where it goes, and save smart in 2025!</p>
+  <!-- Header -->
+  <header>
+    <h1>2025 Expenses Tracker</h1>
+    <div class="nav-buttons">
+      <button onclick="location.href='track_expenses.html'">Track Expenses</button>
+      <button onclick="location.href='summary_expenses.html'">Summary</button>
+    </div>
+  </header>
 
-  <button onclick="window.location.href='tracker.html'">Track Expenses</button>
-  <button onclick="window.location.href='summary.html'">Summary Expenses</button>
+  <!-- Main Content -->
+  <main class="dashboard">
+    <!-- Monthly Graph Placeholder -->
+    <section class="graph-section">
+      <h2>Monthly Spending Graph</h2>
+      <div class="graph-placeholder">📊 [Graph will go here]</div>
+    </section>
+
+    <!-- Total Money Left -->
+    <section class="money-left">
+      💸 Total Left This Month: <span class="highlight">₱7,850.00</span>
+    </section>
+
+    <!-- Pie Chart -->
+    <section class="pie-chart-section">
+      <h2>Spending by Category</h2>
+      <div class="chart-placeholder">🥧 [Pie Chart will go here]</div>
+    </section>
+  </main>
 </body>
 </html>
