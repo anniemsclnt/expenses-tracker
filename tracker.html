@@ -18,9 +18,9 @@
 
     <!-- Right side: Input Form -->
     <div class="form-box">
-   <form id="expenseForm">
-  <label>Select Month:</label>
-  <select id="monthSelector">
+<form id="expenseForm">
+  <label for="monthInput">Month:</label>
+  <select id="monthInput" required>
     <option value="January">January</option>
     <option value="February">February</option>
     <option value="March">March</option>
@@ -35,15 +35,18 @@
     <option value="December">December</option>
   </select>
 
-  <label>Salary:</label>
+  <label for="dateInput">Date:</label>
+  <input type="date" id="dateInput" required>
+
+  <label for="salaryInput">Salary:</label>
   <input type="number" id="salaryInput" placeholder="Enter salary in ₱">
 
   <hr>
 
-  <label>Expense Category:</label>
+  <label for="categoryInput">Expense Category:</label>
   <input type="text" id="categoryInput" placeholder="e.g. Food" required>
 
-  <label>Amount:</label>
+  <label for="amountInput">Amount:</label>
   <input type="number" id="amountInput" placeholder="Amount in ₱" required>
 
   <button type="submit">Add Expense</button>
