@@ -26,34 +26,13 @@ function updateSummary() {
 
 function renderExpenses() {
   expenseList.innerHTML = '';
-  expenses.forEach((item) => {
+  expenses.forEach((item, index) => {
     const li = document.createElement('li');
-    li.textContent = `${item.category}: ${formatCurrency(item.amount)}`;
+    li.innerHTML = `
+      ${item.category}: ${formatCurrency(item.amount)}
+      <button onclick="deleteExpense(${index})" style="margin-left: 10px; color: red;">🗑️ Delete</button>
+    `;
     expenseList.appendChild(li);
   });
   updateSummary();
 }
-
-expenseForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-  const category = categoryInput.value;
-  const amount = parseFloat(amountInput.value);
-
-  if (salaryInput.value) {
-    salary = parseFloat(salaryInput.value);
-    localStorage.setItem("salary", salary);
-    salaryInput.value = "";
-  }
-
-  if (!category || isNaN(amount)) return;
-
-  expenses.push({ category, amount });
-  localStorage.setItem("expenses", JSON.stringify(expenses));
-
-  categoryInput.value = "";
-  amountInput.value = "";
-
-  renderExpenses();
-});
-
-renderExpenses();
