@@ -19,12 +19,12 @@ function formatCurrency(value) {
   return `₱${value.toLocaleString('en-PH', { minimumFractionDigits: 2 })}`;
 }
 
-// Save data
+// Save data to localStorage
 function saveData() {
   localStorage.setItem("monthlyData", JSON.stringify(data));
 }
 
-// Render current month
+// Render current month data
 function renderExpenses() {
   const thisMonth = data[currentMonth] || { salary: 0, expenses: [] };
   const expenses = thisMonth.expenses || [];
@@ -52,7 +52,7 @@ function renderExpenses() {
   moneyLeftDisplay.className = "highlight";
 }
 
-// Form submit
+// Add new expense and salary
 expenseForm.addEventListener("submit", (e) => {
   e.preventDefault();
   const category = categoryInput.value;
@@ -63,7 +63,7 @@ expenseForm.addEventListener("submit", (e) => {
   if (!data[currentMonth]) data[currentMonth] = { salary: 0, expenses: [] };
   const monthData = data[currentMonth];
 
-  // Set salary if updated
+  // If salary input is provided, save it
   if (salaryInput.value) {
     monthData.salary = parseFloat(salaryInput.value);
     salaryInput.value = "";
@@ -72,21 +72,21 @@ expenseForm.addEventListener("submit", (e) => {
   // Add new expense
   monthData.expenses.push({ category, amount });
 
-  // Save & reset form
+  // Save and reset the form
   categoryInput.value = "";
   amountInput.value = "";
   saveData();
   renderExpenses();
 });
 
-// Delete
+// Delete an expense
 function deleteExpense(index) {
   data[currentMonth].expenses.splice(index, 1);
   saveData();
   renderExpenses();
 }
 
-// Edit
+// Edit an expense
 function editExpense(index) {
   const item = data[currentMonth].expenses[index];
   const span = document.getElementById(`expenseText-${index}`);
@@ -98,7 +98,7 @@ function editExpense(index) {
   `;
 }
 
-// Save Edit
+// Save the edited expense
 function saveEdit(index) {
   const newCategory = document.getElementById(`editCategory-${index}`).value;
   const newAmount = parseFloat(document.getElementById(`editAmount-${index}`).value);
@@ -113,7 +113,7 @@ function saveEdit(index) {
   renderExpenses();
 }
 
-// Change month event
+// Change month event handler
 monthSelector.addEventListener("change", () => {
   currentMonth = monthSelector.value;
   renderExpenses();
