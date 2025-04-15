@@ -28,11 +28,44 @@ function renderExpenses() {
   expenseList.innerHTML = '';
   expenses.forEach((item, index) => {
     const li = document.createElement('li');
+
     li.innerHTML = `
-      ${item.category}: ${formatCurrency(item.amount)}
-      <button onclick="deleteExpense(${index})" style="margin-left: 10px; color: red;">🗑️ Delete</button>
+      <span id="expenseText-${index}">
+        ${item.category}: ${formatCurrency(item.amount)}
+      </span>
+      <button onclick="editExpense(${index})" style="margin-left: 10px;">✏️ Edit</button>
+      <button onclick="deleteExpense(${index})" style="color: red;">🗑️ Delete</button>
     `;
+
     expenseList.appendChild(li);
   });
   updateSummary();
 }
+
+function deleteExpense(index) {
+  expenses.splice(index, 1); // remove 1 item at the given index
+  localStorage.setItem("expenses", JSON.stringify(expenses)); // update storage
+  renderExpenses(); // re-render list
+}
+function editExpense(index) {
+  const item = expenses[index];
+  const span = document.getElementById(`expenseText-${index}`);
+
+  // Replace the span with editable inputs
+  span.innerHTML = `
+    <input type="text" id="editCategory-${index}" value="${item.category}" style="width: 100px;">
+    <input type="number" id="editAmount-${index}" value="${item.amount}" style="width: 80px;">
+    <button onclick="saveEdit(${index})" style="color: green;">💾 Save</button>
+  `;
+}
+function saveEdit(index) {
+  const newCategory = document.getElementById(`editCategory-${index}`).value;
+  const newAmount = parseFloat(document.getElementById(`editAmount-${index}`).value);
+
+  if (!newCategory || isNaN(newAmount)) return alert("Please enter valid data");
+
+  expenses[index] = { category: newCategory, amount: newAmount };
+  localStorage.setItem("expenses", JSON.stringify(expenses));
+  renderExpenses();
+}
+
