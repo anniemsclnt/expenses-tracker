@@ -1,125 +1,99 @@
-/* Import Feminine Font */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap');
-
-/* Body Background */
+/* Font + Base Setup */
 body {
-  background-color: #f8e1f4; /* Soft pastel pink */
-  font-family: 'Playfair Display', serif; /* Feminine font */
-  color: #333; /* Dark text for readability */
+  font-family: 'Cormorant Garamond', serif;
+  background-color: #F0FDF4;
+  color: #2E7D61;
   margin: 0;
   padding: 0;
-}
-
-/* Header */
-h1, h2, h3 {
-  color: #f29dc3; /* Soft pastel pink for headings */
   text-align: center;
-  font-weight: 600;
 }
 
-/* Form and Inputs */
-input, select, button {
+h1 {
+  font-size: 3em;
+  margin-top: 20px;
+  color: #4BA88D;
+}
+
+h2 {
+  color: #58A88C;
+  margin-bottom: 10px;
+}
+
+/* Notification Bar */
+.notification-bar {
+  background-color: #D4F8E8;
+  color: #2E7D61;
   padding: 10px;
-  border-radius: 5px;
-  margin: 5px 0;
+  font-size: 16px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
-input[type="number"], input[type="text"], input[type="date"], select {
-  border: 1px solid #f1c6d6; /* Light pastel pink border */
-  background-color: #fff5f9; /* Very light pink background */
-  color: #333;
-  width: 100%; /* Make the inputs full width for better UX */
+/* Navigation Buttons */
+.nav-buttons {
+  margin: 20px 0;
 }
 
-button {
-  background-color: #f0c1f1; /* Light pink background */
-  color: white;
+.nav-buttons button {
+  background-color: #A8D5BA;
   border: none;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  width: 100%;
-  padding: 12px;
-  border-radius: 5px;
-}
-
-button:hover {
-  background-color: #f5a0d3; /* Slightly darker pink on hover */
-}
-
-/* Expense list items */
-li {
-  background-color: #ffffff; /* White background for expenses */
-  margin: 10px 0;
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #f1c6d6;
-  font-size: 16px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-/* Highlight Money Left in Pastel Green */
-.highlight {
-  background-color: #b8f7b4; /* Soft pastel green */
-  color: #333;
-  font-weight: bold;
-  padding: 5px;
-  border-radius: 5px;
-}
-
-/* Input and Select Fields (for month and date) */
-input[type="date"], select {
-  background-color: #fef7f2; /* Very light peach background */
-  border: 1px solid #f8b8d3;
-}
-
-label {
-  font-size: 16px;
-  color: #f29dc3; /* Soft pastel pink */
-}
-
-/* Buttons for Edit and Delete */
-button:hover {
-  background-color: #f5a0d3; /* Slightly darker pink on hover */
   color: white;
-}
-
-button:active {
-  background-color: #f58da1; /* Slightly darker pink when pressed */
-}
-
-/* Expense List */
-#expenseList {
-  padding: 0;
-  list-style: none;
-  max-height: 400px;
-  overflow-y: scroll;
-}
-
-/* Month Selector */
-select {
-  background-color: #e0f4f1; /* Light pastel teal */
-  color: #333;
+  padding: 10px 20px;
+  margin: 0 10px;
   font-size: 16px;
-  border: 1px solid #f1c6d6;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-/* Salary and Total Display */
-#salaryDisplay, #totalDisplay, #moneyLeftDisplay {
+.nav-buttons button:hover {
+  background-color: #81C29B;
+}
+
+/* Graph Section */
+.graph-section, .pie-chart-section {
+  margin: 40px 0;
+}
+
+.graph-placeholder, .chart-placeholder {
+  background-color: #ffffff;
+  border: 2px dashed #A8D5BA;
+  border-radius: 12px;
+  padding: 40px;
+  margin: 0 auto;
+  max-width: 600px;
+  font-size: 18px;
+}
+
+/* Money Left Section */
+.money-left {
+  background-color: #C8F2CC;
+  display: inline-block;
+  padding: 15px 25px;
+  border-radius: 12px;
   font-size: 20px;
   font-weight: bold;
-  color: #f29dc3;
-  padding: 10px;
-  margin: 10px 0;
-  text-align: center;
+  margin-top: 20px;
 }
 
-/* Highlight the money left */
-#moneyLeftDisplay {
-  background-color: #b8f7b4; /* Soft pastel green */
-  color: #333;
-  font-weight: bold;
-  padding: 5px;
-  border-radius: 5px;
+.highlight {
+  color: #1A593E;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2em;
+  }
+
+  .nav-buttons button {
+    margin: 10px 5px;
+    width: 80%;
+  }
+
+  .graph-placeholder, .chart-placeholder {
+    padding: 20px;
+    font-size: 16px;
+  }
 }
