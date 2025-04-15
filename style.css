@@ -7,27 +7,43 @@ body {
   padding: 0;
 }
 
-/* 🌸 Center the header and buttons */
+/* 🌸 Main Header: Title at Top Center */
 .main-header {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 30px;
-  text-align: center;
+  margin-bottom: 20px;
 }
 
 .main-header h1 {
   font-size: 3em;
   color: #4BA88D;
+  font-weight: 600;
   margin-bottom: 20px;
 }
 
+/* 🌿 Navigation Buttons Below Title */
 .nav-buttons {
   display: flex;
-  justify-content: center;
+  gap: 15px;
   flex-wrap: wrap;
-  gap: 20px;
-  margin-bottom: 40px;
+  justify-content: center;
+}
+
+.nav-buttons button {
+  background-color: #C8F2CC; /* pastel green */
+  color: #1A1A1A; /* black text */
+  padding: 12px 24px;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.nav-buttons button:hover {
+  background-color: #A8D5BA; /* softer green on hover */
 }
 
 /* ✨ Dashboard Layout */
