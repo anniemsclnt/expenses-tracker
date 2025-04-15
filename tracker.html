@@ -15,6 +15,21 @@
 
   <canvas id="expenseChart" width="400" height="400"></canvas>
 
+<h2>Summary</h2>
+<div id="summaryBox">
+  <p><strong>Total Spent:</strong> $<span id="totalSpent">0</span></p>
+  <p><strong>Top Category:</strong> <span id="topCategory">-</span></p>
+  <p><strong>Total Earnings:</strong> $<span id="totalEarnings">0</span></p>
+  <p><strong>Savings:</strong> $<span id="savings">0</span></p>
+</div>
+
+<h2>Earnings Input</h2>
+<form id="earningsForm">
+  <input type="number" id="earningAmount" placeholder="Earning Amount" required>
+  <button type="submit">Add Earning</button>
+</form>
+
+
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="script.js"></script>
 </body>
