@@ -5,18 +5,121 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Track Expenses - 2025 Expense Tracker</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Style overrides and additions */
+
+    /* Remove nav buttons */
+    .nav-buttons {
+      display: none;
+    }
+
+    /* Header center alignment */
+    header {
+      text-align: center;
+      background-color: #f0e6d2;
+      padding: 20px;
+    }
+
+    header h1 a {
+      text-decoration: none;
+      color: #4a6d47; /* Moss green */
+      font-size: 2.5rem;
+      font-weight: bold;
+    }
+
+    /* Expense form section */
+    .expense-form {
+      background-color: #f9f5e9;
+      padding: 30px;
+      max-width: 600px;
+      margin: 30px auto;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(100, 80, 50, 0.1);
+    }
+
+    .expense-form h2 {
+      color: #4a6d47;
+      margin-bottom: 20px;
+    }
+
+    .expense-form label {
+      display: block;
+      margin: 10px 0 5px;
+      color: #6b4e3d;
+      font-weight: bold;
+    }
+
+    .expense-form input,
+    .expense-form select {
+      width: 100%;
+      padding: 8px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      margin-bottom: 15px;
+      font-size: 1rem;
+    }
+
+    .expense-form button {
+      background-color: #A1D9B3; /* Pastel emerald */
+      color: black;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .expense-form button:hover {
+      background-color: #8bcfa7;
+    }
+
+    /* Transaction list styling */
+    .expense-list {
+      max-width: 700px;
+      margin: 30px auto;
+      background-color: #fffef6;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(90, 70, 40, 0.1);
+      border: 2px dashed #d6caa3;
+      font-family: 'Courier New', Courier, monospace;
+    }
+
+    .expense-list h2 {
+      color: #4a6d47;
+      margin-bottom: 15px;
+    }
+
+    #expense-list li {
+      list-style: none;
+      margin-bottom: 15px;
+      background-color: #fdf9ec;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #e1d3b3;
+      color: #3e2c1d;
+    }
+
+    #expense-list button {
+      margin-left: 10px;
+      padding: 4px 10px;
+      font-size: 0.85rem;
+      background-color: #e6d6b1;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    #expense-list button:hover {
+      background-color: #d4c093;
+    }
+  </style>
 </head>
 <body>
   <header>
     <h1><a href="index.html">2025 Expense Tracker</a></h1>
   </header>
-
-  <nav class="nav-buttons">
-    <button onclick="location.href='track.html'">Track Expenses</button>
-    <button onclick="location.href='summary.html'">Summary</button>
-    <button onclick="location.href='savings.html'">Savings</button>
-    <button onclick="location.href='notifications.html'">Notification</button>
-  </nav>
 
   <main>
     <section class="expense-form">
@@ -33,7 +136,7 @@
           <option value="Miscellaneous">Miscellaneous</option>
         </select>
 
-        <label for="expense-amount">Amount ($)</label>
+        <label for="expense-amount">Amount (₱)</label>
         <input type="number" id="expense-amount" name="expense-amount" required />
 
         <label for="expense-date">Date</label>
@@ -49,58 +152,42 @@
     </section>
   </main>
 
-  <script src="script.js"></script>
-
-  <!-- JavaScript Section -->
   <script>
     window.onload = function() {
-      // Function to handle form submission and adding expenses
       const expenseForm = document.getElementById('expense-form');
       const expenseList = document.getElementById('expense-list');
-      
-      // Array to store expenses
+
       let expenses = [];
 
-      // Event listener for form submission
       expenseForm.addEventListener('submit', function(e) {
-        e.preventDefault(); // Prevent form from refreshing the page
+        e.preventDefault();
 
-        // Get form values
         const name = document.getElementById('expense-name').value;
         const category = document.getElementById('expense-category').value;
         const amount = parseFloat(document.getElementById('expense-amount').value);
         const date = document.getElementById('expense-date').value;
 
-        // Create a new expense object
         const expense = {
-          id: Date.now(),  // Unique ID using timestamp
-          name: name,
-          category: category,
-          amount: amount,
-          date: date
+          id: Date.now(),
+          name,
+          category,
+          amount,
+          date
         };
 
-        // Add new expense to expenses array
         expenses.push(expense);
-
-        // Clear form fields
         expenseForm.reset();
-
-        // Update the expense list
         updateExpenseList();
       });
 
-      // Function to update the expense list
       function updateExpenseList() {
-        expenseList.innerHTML = ''; // Clear the current list
-
-        // Iterate over expenses and create list items
+        expenseList.innerHTML = '';
         expenses.forEach(expense => {
           const li = document.createElement('li');
           li.innerHTML = `
             <strong>${expense.name}</strong> | 
             ${expense.category} | 
-            $${expense.amount.toFixed(2)} | 
+            ₱${expense.amount.toFixed(2)} | 
             ${expense.date}
             <button onclick="editExpense(${expense.id})">Edit</button>
             <button onclick="deleteExpense(${expense.id})">Delete</button>
@@ -109,7 +196,6 @@
         });
       }
 
-      // Function to edit an expense
       window.editExpense = function(id) {
         const expense = expenses.find(exp => exp.id === id);
         if (expense) {
@@ -117,13 +203,10 @@
           document.getElementById('expense-category').value = expense.category;
           document.getElementById('expense-amount').value = expense.amount;
           document.getElementById('expense-date').value = expense.date;
-
-          // Remove the expense from the list before editing
           deleteExpense(id);
         }
       };
 
-      // Function to delete an expense
       window.deleteExpense = function(id) {
         expenses = expenses.filter(exp => exp.id !== id);
         updateExpenseList();
