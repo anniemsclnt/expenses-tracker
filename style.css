@@ -1,4 +1,4 @@
-/* 🌿 Font + Base Setup */
+/* Base Styles */
 body {
   font-family: 'Cormorant Garamond', serif;
   background-color: #F0FDF4;
@@ -16,15 +16,21 @@ body {
   font-size: 16px;
 }
 
-/* 🌸 Centered Header */
-.main-header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 30px auto 20px auto;
+/* Container for Consistent Layout */
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
-/* Title Text */
+/* 🌸 Centered Header */
+.main-header {
+  background-color: transparent;
+  width: 100%;
+  padding-top: 30px;
+  padding-bottom: 20px;
+}
+
 .main-header h1 {
   font-size: 3em;
   color: #4BA88D;
@@ -33,7 +39,7 @@ body {
   text-align: center;
 }
 
-/* Navigation Buttons */
+/* 🌿 Navigation Buttons */
 .nav-buttons {
   display: flex;
   justify-content: center;
@@ -57,7 +63,7 @@ body {
   background-color: #A8D5BA;
 }
 
-/* 🌷 Dashboard Content */
+/* ✨ Dashboard Content */
 .dashboard {
   display: flex;
   flex-direction: column;
@@ -65,9 +71,10 @@ body {
   max-width: 900px;
   margin: 0 auto;
   padding: 0 20px;
+  text-align: center;
 }
 
-/* 📊 Graph and Pie Chart Sections */
+/* 📊 Sections */
 .graph-section,
 .pie-chart-section {
   width: 100%;
@@ -82,7 +89,7 @@ body {
   margin-bottom: 10px;
 }
 
-/* Chart Boxes */
+/* Chart Placeholders */
 .graph-placeholder,
 .chart-placeholder {
   background-color: #ffffff;
@@ -105,7 +112,7 @@ body {
   text-align: center;
 }
 
-/* 📱 Responsive Design */
+/* 📱 Responsive Fix */
 @media (max-width: 768px) {
   .main-header h1 {
     font-size: 2.2em;
