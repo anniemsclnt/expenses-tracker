@@ -50,5 +50,85 @@
   </main>
 
   <script src="script.js"></script>
+
+  <!-- JavaScript Section -->
+  <script>
+    window.onload = function() {
+      // Function to handle form submission and adding expenses
+      const expenseForm = document.getElementById('expense-form');
+      const expenseList = document.getElementById('expense-list');
+      
+      // Array to store expenses
+      let expenses = [];
+
+      // Event listener for form submission
+      expenseForm.addEventListener('submit', function(e) {
+        e.preventDefault(); // Prevent form from refreshing the page
+
+        // Get form values
+        const name = document.getElementById('expense-name').value;
+        const category = document.getElementById('expense-category').value;
+        const amount = parseFloat(document.getElementById('expense-amount').value);
+        const date = document.getElementById('expense-date').value;
+
+        // Create a new expense object
+        const expense = {
+          id: Date.now(),  // Unique ID using timestamp
+          name: name,
+          category: category,
+          amount: amount,
+          date: date
+        };
+
+        // Add new expense to expenses array
+        expenses.push(expense);
+
+        // Clear form fields
+        expenseForm.reset();
+
+        // Update the expense list
+        updateExpenseList();
+      });
+
+      // Function to update the expense list
+      function updateExpenseList() {
+        expenseList.innerHTML = ''; // Clear the current list
+
+        // Iterate over expenses and create list items
+        expenses.forEach(expense => {
+          const li = document.createElement('li');
+          li.innerHTML = `
+            <strong>${expense.name}</strong> | 
+            ${expense.category} | 
+            $${expense.amount.toFixed(2)} | 
+            ${expense.date}
+            <button onclick="editExpense(${expense.id})">Edit</button>
+            <button onclick="deleteExpense(${expense.id})">Delete</button>
+          `;
+          expenseList.appendChild(li);
+        });
+      }
+
+      // Function to edit an expense
+      window.editExpense = function(id) {
+        const expense = expenses.find(exp => exp.id === id);
+        if (expense) {
+          document.getElementById('expense-name').value = expense.name;
+          document.getElementById('expense-category').value = expense.category;
+          document.getElementById('expense-amount').value = expense.amount;
+          document.getElementById('expense-date').value = expense.date;
+
+          // Remove the expense from the list before editing
+          deleteExpense(id);
+        }
+      };
+
+      // Function to delete an expense
+      window.deleteExpense = function(id) {
+        expenses = expenses.filter(exp => exp.id !== id);
+        updateExpenseList();
+      };
+    };
+  </script>
 </body>
 </html>
