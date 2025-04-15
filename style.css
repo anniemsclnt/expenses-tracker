@@ -1,58 +1,62 @@
 body {
+  font-family: Arial, sans-serif;
   background-color: white;
   color: black;
-  font-family: Arial, sans-serif;
   padding: 20px;
   text-align: center;
 }
 
 h1 {
-  margin-bottom: 30px;
-}
-
-form {
-  margin: 20px 0;
-}
-
-input {
-  padding: 8px;
-  margin: 5px;
-  font-size: 14px;
-}
-
-button {
-  padding: 10px 20px;
-  font-size: 14px;
-  cursor: pointer;
-}
-
-.salary-section {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  align-items: center;
   margin-bottom: 20px;
 }
 
-table {
-  margin: 20px auto;
-  width: 60%;
-  border-collapse: collapse;
+button {
+  margin: 10px;
+  padding: 12px 24px;
+  font-size: 16px;
+  cursor: pointer;
 }
 
-th, td {
-  border: 1px solid #000;
+.tracker-container {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 30px;
+  flex-wrap: wrap;
+}
+
+.summary-box, .form-box {
+  width: 45%;
+  padding: 20px;
+  border: 1px solid #aaa;
+  border-radius: 8px;
+  box-shadow: 0 0 10px #ccc;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+input {
   padding: 10px;
+  font-size: 14px;
 }
 
-tfoot td {
+.highlight {
   font-weight: bold;
+  background-color: #c6f7d0; /* pastel green */
+  padding: 4px 8px;
+  border-radius: 5px;
 }
 
-.red {
-  color: red;
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 20px;
+  text-align: left;
 }
 
-.green {
-  color: green;
+.summary-totals {
+  margin-top: 20px;
 }
