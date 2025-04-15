@@ -1,5 +1,9 @@
 // Wait for the DOM to load before executing the script
 window.onload = function() {
+  // Get the current month dynamically
+  const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  const currentMonth = monthNames[new Date().getMonth()]; // Get current month as a string
+
   // Line Chart - Monthly Spending Trend
   var ctxLine = document.getElementById('lineChart').getContext('2d');
   var lineChart = new Chart(ctxLine, {
@@ -21,7 +25,7 @@ window.onload = function() {
       plugins: {
         title: {
           display: true,
-          text: 'Spending Trend (This Month)',
+          text: `Spending Trend for ${currentMonth}`, // Dynamic title
           font: {
             size: 18
           }
@@ -64,7 +68,7 @@ window.onload = function() {
       plugins: {
         title: {
           display: true,
-          text: 'Expense Breakdown (This Month)',
+          text: `Expense Breakdown for ${currentMonth}`, // Dynamic title
           font: {
             size: 18
           }
