@@ -1,33 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>2025 Expense Tracker</title>
-  <link rel="stylesheet" href="style.css" />
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <header>
-    <h1><a href="index.html">2025 Expense Tracker</a></h1>
-  </header>
+    <header>
+        <h1>Welcome to Your Expense Tracker</h1>
+        <nav>
+            <ul>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="signup.html">Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
 
-  <nav class="nav-buttons">
-    <button onclick="location.href='track.html'">Track Expenses</button>
-    <button onclick="location.href='summary.html'">Summary</button>
-    <button onclick="location.href='savings.html'">Savings</button>
-    <button onclick="location.href='notifications.html'">Notification</button>
-  </nav>
-
-  <main>
-    <section class="chart-section">
-      <canvas id="lineChart"></canvas>
-    </section>
-    <section class="chart-section">
-      <canvas id="pieChart"></canvas>
-    </section>
-  </main>
-
-  <script src="script.js"></script>
+    <main>
+        <section class="intro">
+            <h2>Track your expenses and save more!</h2>
+            <p>Stay on top of your financial goals with personalized expense tracking and smart budgeting.</p>
+        </section>
+    </main>
+    
+    <footer>
+        <p>&copy; 2025 Your Expense Tracker</p>
+    </footer>
 </body>
 </html>
