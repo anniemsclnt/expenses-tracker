@@ -1,22 +1,50 @@
-// Wait for the DOM to load before executing the script
-window.onload = function() {
-  // Get the current month dynamically
-  const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-  const currentMonth = monthNames[new Date().getMonth()]; // Get current month as a string
+window.onload = function () {
+  // Load saved expenses from localStorage
+  const expenses = JSON.parse(localStorage.getItem('expenses')) || [];
 
-  // Line Chart - Monthly Spending Trend
-  var ctxLine = document.getElementById('lineChart').getContext('2d');
-  var lineChart = new Chart(ctxLine, {
-    type: 'line', // Line chart type
+  // Group expenses by week
+  const weeklyTotals = [0, 0, 0, 0];
+  const categoryTotals = {
+    Food: 0,
+    Transport: 0,
+    Entertainment: 0,
+    Miscellaneous: 0
+  };
+
+  expenses.forEach(expense => {
+    const expenseDate = new Date(expense.date);
+    const day = expenseDate.getDate();
+
+    // Determine which week of the month
+    let weekIndex = Math.floor((day - 1) / 7);
+    if (weekIndex > 3) weekIndex = 3; // Limit to 4 weeks
+    weeklyTotals[weekIndex] += expense.amount;
+
+    // Group by category
+    if (categoryTotals[expense.category] !== undefined) {
+      categoryTotals[expense.category] += expense.amount;
+    } else {
+      categoryTotals.Miscellaneous += expense.amount;
+    }
+  });
+
+  const monthNames = ["January", "February", "March", "April", "May", "June",
+                      "July", "August", "September", "October", "November", "December"];
+  const currentMonth = monthNames[new Date().getMonth()];
+
+  // Line Chart - Weekly Spending
+  const ctxLine = document.getElementById('lineChart').getContext('2d');
+  const lineChart = new Chart(ctxLine, {
+    type: 'line',
     data: {
-      labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'], // X-axis labels (weeks in a month)
+      labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
       datasets: [{
-        label: 'Monthly Spending ($)',
-        data: [150, 200, 250, 300], // Example data for spending per week
-        backgroundColor: 'rgba(161, 217, 179, 0.2)', // Light pastel emerald
-        borderColor: 'rgba(161, 217, 179, 1)', // Pastel emerald border color
+        label: 'Monthly Spending (₱)',
+        data: weeklyTotals,
+        backgroundColor: 'rgba(161, 217, 179, 0.2)',
+        borderColor: 'rgba(161, 217, 179, 1)',
         borderWidth: 2,
-        tension: 0.4, // Smooth lines
+        tension: 0.4,
         fill: true
       }]
     },
@@ -25,13 +53,13 @@ window.onload = function() {
       plugins: {
         title: {
           display: true,
-          text: `Spending Trend for ${currentMonth}`, // Dynamic title
+          text: `Spending Trend for ${currentMonth}`,
           font: {
             size: 18
           }
         },
         legend: {
-          display: false // Hide legend (since there's only one dataset)
+          display: false
         }
       },
       scales: {
@@ -45,21 +73,21 @@ window.onload = function() {
     }
   });
 
-  // Pie Chart - Expense Breakdown by Category
-  var ctxPie = document.getElementById('pieChart').getContext('2d');
-  var pieChart = new Chart(ctxPie, {
-    type: 'pie', // Pie chart type
+  // Pie Chart - Category Breakdown
+  const ctxPie = document.getElementById('pieChart').getContext('2d');
+  const pieChart = new Chart(ctxPie, {
+    type: 'pie',
     data: {
-      labels: ['Food', 'Transport', 'Entertainment', 'Misc'], // Categories
+      labels: Object.keys(categoryTotals),
       datasets: [{
-        data: [300, 150, 100, 50], // Example data for each category
+        data: Object.values(categoryTotals),
         backgroundColor: [
-          'rgba(161, 217, 179, 0.8)', // Pastel emerald for food
-          'rgba(189, 154, 126, 0.8)', // Clay brown for transport
-          'rgba(236, 156, 145, 0.8)', // Light red for entertainment
-          'rgba(212, 180, 120, 0.8)' // Soft yellow for misc
+          'rgba(161, 217, 179, 0.8)',
+          'rgba(189, 154, 126, 0.8)',
+          'rgba(236, 156, 145, 0.8)',
+          'rgba(212, 180, 120, 0.8)'
         ],
-        borderColor: '#fff', // White border for each segment
+        borderColor: '#fff',
         borderWidth: 1
       }]
     },
@@ -68,13 +96,13 @@ window.onload = function() {
       plugins: {
         title: {
           display: true,
-          text: `Expense Breakdown for ${currentMonth}`, // Dynamic title
+          text: `Expense Breakdown for ${currentMonth}`,
           font: {
             size: 18
           }
         },
         legend: {
-          position: 'top' // Position legend at the top
+          position: 'top'
         }
       }
     }
