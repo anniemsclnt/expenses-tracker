@@ -1,22 +1,22 @@
-document.getElementById('signup-form').addEventListener('submit', function(e) {
+document.getElementById("signup-form").addEventListener("submit", function (e) {
   e.preventDefault();
 
-  const username = document.getElementById('username').value.trim();
-  const password = document.getElementById('password').value;
+  const username = document.getElementById("signup-username").value;
+  const email = document.getElementById("signup-email").value;
+  const password = document.getElementById("signup-password").value;
 
-  if (!username || !password) {
-    alert('Please fill in all fields.');
+  let users = JSON.parse(localStorage.getItem("users")) || [];
+
+  const userExists = users.some(user => user.email === email);
+
+  if (userExists) {
+    alert("Email already registered.");
     return;
   }
 
-  // Save to localStorage
-  const users = JSON.parse(localStorage.getItem('users')) || {};
-  if (users[username]) {
-    alert('Username already exists.');
-  } else {
-    users[username] = { password };
-    localStorage.setItem('users', JSON.stringify(users));
-    alert('Account created! You can now log in.');
-    window.location.href = 'login.html';
-  }
+  users.push({ username, email, password });
+  localStorage.setItem("users", JSON.stringify(users));
+
+  alert("Sign up successful! Please login.");
+  window.location.href = "login.html";
 });
