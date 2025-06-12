@@ -6,14 +6,14 @@ window.onload = function () {
   const totalExpenses = expenses.reduce((sum, e) => sum + e.amount, 0);
   const savings = salary - totalExpenses;
 
-  document.getElementById("yearlyEarnings").textContent = `₱${salary.toLocaleString('en-PH', { minimumFractionDigits: 2 })}`;
-  document.getElementById("yearlyExpenses").textContent = `₱${totalExpenses.toLocaleString('en-PH', { minimumFractionDigits: 2 })}`;
-  document.getElementById("yearlySavings").textContent = `₱${savings.toLocaleString('en-PH', { minimumFractionDigits: 2 })}`;
+  document.getElementById("total-salary").textContent = `₱${salary.toLocaleString('en-PH', { minimumFractionDigits: 2 })}`;
+  document.getElementById("total-expenses").textContent = `₱${totalExpenses.toLocaleString('en-PH', { minimumFractionDigits: 2 })}`;
+  document.getElementById("total-savings").textContent = `₱${savings.toLocaleString('en-PH', { minimumFractionDigits: 2 })}`;
 
   // Line Chart: Yearly expenses grouped by month
   const monthlyTotals = new Array(12).fill(0);
   expenses.forEach(exp => {
-    const month = new Date(exp.date).getMonth(); // 0 = Jan
+    const month = new Date(exp.date).getMonth();
     monthlyTotals[month] += exp.amount;
   });
 
