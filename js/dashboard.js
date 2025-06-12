@@ -1,76 +1,76 @@
 window.onload = function () {
+  const salary = parseFloat(localStorage.getItem("salary")) || 0;
   const expenses = JSON.parse(localStorage.getItem("expenses")) || [];
 
-  // Group by month
-  const monthlyTotals = Array(12).fill(0);
-  const currentMonth = new Date().getMonth();
-  const categoryTotals = {};
+  // Totals
+  const totalExpenses = expenses.reduce((sum, e) => sum + e.amount, 0);
+  const savings = salary - totalExpenses;
 
-  expenses.forEach((expense) => {
-    const date = new Date(expense.date);
-    const month = date.getMonth();
-    monthlyTotals[month] += expense.amount;
+  document.getElementById("yearlyEarnings").textContent = `₱${salary.toLocaleString('en-PH', { minimumFractionDigits: 2 })}`;
+  document.getElementById("yearlyExpenses").textContent = `₱${totalExpenses.toLocaleString('en-PH', { minimumFractionDigits: 2 })}`;
+  document.getElementById("yearlySavings").textContent = `₱${savings.toLocaleString('en-PH', { minimumFractionDigits: 2 })}`;
 
-    if (month === currentMonth) {
-      categoryTotals[expense.category] = (categoryTotals[expense.category] || 0) + expense.amount;
-    }
+  // Line Chart: Yearly expenses grouped by month
+  const monthlyTotals = new Array(12).fill(0);
+  expenses.forEach(exp => {
+    const month = new Date(exp.date).getMonth(); // 0 = Jan
+    monthlyTotals[month] += exp.amount;
   });
 
-  const ctxYearly = document.getElementById("yearlyChart").getContext("2d");
-  new Chart(ctxYearly, {
-    type: "line",
+  const ctxLine = document.getElementById("lineChart").getContext("2d");
+  new Chart(ctxLine, {
+    type: 'line',
     data: {
-      labels: [
-        "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-      ],
+      labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
       datasets: [{
-        label: "Yearly Spending (₱)",
+        label: 'Monthly Spending (₱)',
         data: monthlyTotals,
-        borderColor: "#4a6d47",
-        backgroundColor: "rgba(161, 217, 179, 0.2)",
-        fill: true,
-        tension: 0.3
-      }]
-    },
-    options: {
-      responsive: true
-    }
-  });
-
-  const ctxPie = document.getElementById("monthlyPieChart").getContext("2d");
-  new Chart(ctxPie, {
-    type: "pie",
-    data: {
-      labels: Object.keys(categoryTotals),
-      datasets: [{
-        data: Object.values(categoryTotals),
-        backgroundColor: ['#a1d9b3', '#bd9a7e', '#ec9c91', '#d4b478']
+        borderColor: '#6a994e',
+        backgroundColor: 'rgba(106, 153, 78, 0.2)',
+        tension: 0.4,
+        fill: true
       }]
     },
     options: {
       plugins: {
         title: {
           display: true,
-          text: `Spending Breakdown - This Month`
+          text: "Spending Trend in 2025"
+        }
+      }
+    }
+  });
+
+  // Pie Chart: Category breakdown this month
+  const currentMonth = new Date().getMonth();
+  const categoryTotals = {};
+
+  expenses.forEach(exp => {
+    const expMonth = new Date(exp.date).getMonth();
+    if (expMonth === currentMonth) {
+      categoryTotals[exp.category] = (categoryTotals[exp.category] || 0) + exp.amount;
+    }
+  });
+
+  const ctxPie = document.getElementById("pieChart").getContext("2d");
+  new Chart(ctxPie, {
+    type: 'pie',
+    data: {
+      labels: Object.keys(categoryTotals),
+      datasets: [{
+        data: Object.values(categoryTotals),
+        backgroundColor: [
+          '#a98467', '#c2b280', '#a3b18a', '#e5989b', '#ffb5a7'
+        ]
+      }]
+    },
+    options: {
+      plugins: {
+        title: {
+          display: true,
+          text: "This Month’s Expenses by Category"
         }
       }
     }
   });
 };
-
-// Excel Download Function
-function downloadExcel() {
-  const expenses = JSON.parse(localStorage.getItem("expenses")) || [];
-
-  let csv = "Date,Name,Amount,Category\n";
-  expenses.forEach(e => {
-    csv += `${e.date},${e.name},${e.amount},${e.category}\n`;
-  });
-
-  const blob = new Blob([csv], { type: 'text/csv' });
-  const link = document.createElement("a");
-  link.href = URL.createObjectURL(blob);
-  link.download = "Expense_Summary.csv";
-  link.click();
-}
