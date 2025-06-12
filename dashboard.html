@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Dashboard</h1>
+    <nav class="menu">
+      <ul>
+        <li><a href="track.html">Track Expenses</a></li>
+        <li><a href="summary.html">Summary</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="index.html">Logout</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="financial-summary">
+      <h2>Annual Financial Overview</h2>
+      <p><strong>Total Salary:</strong> <span id="total-salary">₱0.00</span></p>
+      <p><strong>Total Expenses:</strong> <span id="total-expenses">₱0.00</span></p>
+      <p><strong>Total Savings:</strong> <span id="total-savings">₱0.00</span></p>
+    </section>
+
+    <section class="charts">
+      <div class="chart-box">
+        <h3>Monthly Spending Breakdown</h3>
+        <canvas id="pieChart"></canvas>
+      </div>
+      <div class="chart-box">
+        <h3>Yearly Spending Trend</h3>
+        <canvas id="lineChart"></canvas>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/dashboard.js"></script>
+</body>
+</html>
