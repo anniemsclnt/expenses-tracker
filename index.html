@@ -4,30 +4,45 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Expense Tracker</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-  <header>
-    <h1>Welcome to Your Expense Tracker</h1>
-    <div class="nav-buttons">
-      <a href="signup.html"><button>Sign Up</button></a>
-      <a href="login.html"><button>Login</button></a>
+  <header class="hero">
+    <h1>Track Your Spending, <br>Grow Your Savings</h1>
+    <p>A simple, mindful way to manage your money and build better habits.</p>
+    <div class="buttons">
+      <a href="login.html" class="btn login">Login</a>
+      <a href="signup.html" class="btn signup">Sign Up</a>
     </div>
   </header>
 
-  <main>
-    <section class="mission-vision">
-      <h2>Our Mission</h2>
-      <p>Empower individuals to take control of their finances through simple, intuitive expense tracking tools.</p>
+  <section class="mission-vision">
+    <div class="card">
+      <h2>Mission</h2>
+      <p>Empowering individuals to take control of their personal finances through easy-to-use tools and insightful analytics.</p>
+    </div>
+    <div class="card">
+      <h2>Vision</h2>
+      <p>To create a financially aware community where every peso is spent with purpose.</p>
+    </div>
+  </section>
 
-      <h2>Our Vision</h2>
-      <p>To help every household build better financial habits and achieve greater peace of mind through smarter budgeting.</p>
-    </section>
-  </main>
-
-  <footer>
-    <p>&copy; 2025 Your Expense Tracker</p>
-  </footer>
+  <section class="features">
+    <h2>Features</h2>
+    <div class="feature-grid">
+      <div class="feature-item">
+        <img src="icons/graph.png" alt="Graph Icon">
+        <p><strong>Yearly Graphs</strong> &<br> Monthly Breakdown</p>
+      </div>
+      <div class="feature-item">
+        <img src="icons/logging.png" alt="Logging Icon">
+        <p><strong>Smart</strong> Expense Logging</p>
+      </div>
+      <div class="feature-item">
+        <img src="icons/export.png" alt="Export Icon">
+        <p><strong>Exportable</strong> Summary Files</p>
+      </div>
+    </div>
+  </section>
 </body>
 </html>
-
