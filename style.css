@@ -1,70 +1,125 @@
-/* General Reset */
+/* Reset */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* Body */
 body {
   font-family: 'Segoe UI', sans-serif;
-  background-color: #f4f1e1; /* Soft beige background */
-  color: #4a3f35; /* Deep brown text */
-  margin: 0;
-  padding: 0;
+  background-color: #f4f1e1; /* Soft beige */
+  color: #3e3a2f; /* Rich brown */
 }
 
+/* Header */
 header {
-  background-color: #d6c2a1; /* Sand/light brown */
-  color: #3d2c1e;
+  background-color: #d9cbb0; /* Light warm beige */
   padding: 20px;
   text-align: center;
 }
 
 header h1 {
-  margin-bottom: 10px;
+  color: #4a6d47; /* Deep olive green */
   font-size: 2.5rem;
 }
 
+/* Navigation Buttons */
 .nav-buttons {
   display: flex;
   justify-content: center;
   gap: 15px;
-  margin: 20px 0;
-}
-
-.nav-buttons a {
-  text-decoration: none;
+  margin-top: 15px;
 }
 
 .nav-buttons button {
-  background-color: #a1d9b3; /* Pastel moss green */
-  color: #2e2e2e;
+  background-color: #a1d9b3; /* Pastel green */
+  color: #3e3a2f;
   border: none;
-  padding: 12px 24px;
-  border-radius: 50px;
-  font-size: 1rem;
+  padding: 10px 20px;
+  border-radius: 30px; /* Rounded */
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  font-size: 1rem;
+  transition: background-color 0.3s;
 }
 
 .nav-buttons button:hover {
   background-color: #8bcfa7;
 }
 
-section.mission-vision {
-  padding: 40px 20px;
-  background-color: #eee3c9;
-  color: #3f2e22;
+/* Forms */
+form {
+  background-color: #f5eee0;
+  padding: 20px;
+  margin: 20px auto;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 600px;
+  box-shadow: 0 0 10px rgba(74, 109, 71, 0.2);
 }
 
-section.mission-vision h2 {
-  font-size: 2rem;
-  margin-bottom: 10px;
+form label {
+  display: block;
+  margin: 10px 0 5px;
+  font-weight: bold;
 }
 
+form input, form select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Buttons */
+button[type="submit"] {
+  background-color: #bd9a7e; /* Muted clay */
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 25px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background-color: #a97f5d;
+}
+
+/* Chart Container */
+.chart-section {
+  margin: 40px auto;
+  max-width: 700px;
+  background-color: #fffaf0;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(161, 217, 179, 0.2);
+}
+
+canvas {
+  width: 100% !important;
+  height: 400px !important;
+}
+
+/* Footer */
 footer {
-  background-color: #d6c2a1;
-  color: #3d2c1e;
-  text-align: center;
+  background-color: #e6dcc3;
+  color: #3e3a2f;
   padding: 15px;
+  text-align: center;
+  margin-top: 40px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .nav-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nav-buttons button {
+    width: 80%;
+    margin-bottom: 10px;
+  }
 }
