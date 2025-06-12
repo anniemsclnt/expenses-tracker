@@ -1,19 +1,17 @@
-document.getElementById("login-form").addEventListener("submit", function (e) {
+document.getElementById("login-form").addEventListener("submit", function(e) {
   e.preventDefault();
 
-  const email = document.getElementById("login-email").value;
+  const username = document.getElementById("login-username").value;
   const password = document.getElementById("login-password").value;
 
   const users = JSON.parse(localStorage.getItem("users")) || [];
 
-  const user = users.find(user => user.email === email && user.password === password);
+  const matchedUser = users.find(user => user.username === username && user.password === password);
 
-  if (!user) {
-    alert("Invalid email or password.");
-    return;
+  if (matchedUser) {
+    localStorage.setItem("loggedInUser", JSON.stringify(matchedUser));
+    window.location.href = "dashboard.html"; // or whatever page
+  } else {
+    alert("Incorrect username or password.");
   }
-
-  localStorage.setItem("loggedInUser", JSON.stringify(user));
-  alert("Login successful!");
-  window.location.href = "dashboard.html";
 });
