@@ -1,107 +1,79 @@
-/* Reset and Base Styles */
+/* Earthy Theme CSS */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
-  font-family: 'Inter', sans-serif;
-  background-color: #f8f5e4;
-  color: #2e3c2f;
+  background-color: #f4f1e1; /* light beige */
+  color: #2e3d27; /* dark moss green */
   line-height: 1.6;
+  padding: 20px;
 }
 
 header {
-  background-color: #ded0b6;
+  background-color: #d8cbb3; /* earthy tan */
+  padding: 20px;
   text-align: center;
-  padding: 50px 20px 30px;
 }
 
 header h1 {
+  color: #2e3d27;
   font-size: 2.5rem;
-  color: #2f4f2f;
-  font-weight: 700;
-}
-
-header h2 {
-  font-size: 2rem;
-  color: #3d5a3d;
   margin-bottom: 10px;
 }
 
-.subtitle {
-  color: #4d4d4d;
-  font-size: 1rem;
-  margin-bottom: 20px;
-}
-
-.auth-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-}
-
-.btn {
-  padding: 10px 25px;
-  background-color: #6a994e;
-  color: white;
+nav a {
+  color: #2e3d27;
   text-decoration: none;
-  border-radius: 25px;
-  font-weight: 600;
+  margin: 0 10px;
+  font-weight: bold;
+}
+
+main {
+  max-width: 600px;
+  margin: 40px auto;
+  background-color: #fffdf5; /* slightly off white */
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+form label {
+  display: block;
+  margin-top: 15px;
+  color: #4a6d47;
+}
+
+form input, form select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f6ef;
+}
+
+form button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #4a6d47; /* earthy green */
+  color: white;
+  border: none;
+  border-radius: 20px;
+  font-size: 1rem;
+  cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
-.btn:hover {
-  background-color: #588c4a;
-}
-
-.section {
-  padding: 40px 20px;
-  text-align: center;
-}
-
-.section h3 {
-  font-size: 1.5rem;
-  color: #354b39;
-  margin-bottom: 10px;
-}
-
-.features-grid {
-  display: flex;
-  justify-content: center;
-  gap: 40px;
-  flex-wrap: wrap;
-  margin-top: 20px;
-}
-
-.feature-item {
-  width: 200px;
-  text-align: center;
-  color: #3b4f3b;
-}
-
-.feature-item i {
-  font-size: 2rem;
-  margin-bottom: 10px;
-  color: #789262;
+form button:hover {
+  background-color: #3b573a;
 }
 
 footer {
   text-align: center;
-  background-color: #d5cbb2;
-  padding: 20px;
-  color: #3a3a3a;
-  font-size: 0.9rem;
-}
-
-@media (max-width: 600px) {
-  header h1, header h2 {
-    font-size: 1.8rem;
-  }
-
-  .features-grid {
-    flex-direction: column;
-    align-items: center;
-  }
+  margin-top: 50px;
+  color: #999;
 }
