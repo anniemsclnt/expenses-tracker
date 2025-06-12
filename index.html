@@ -8,41 +8,55 @@
 </head>
 <body>
   <header class="hero">
-    <h1>Track Your Spending, <br>Grow Your Savings</h1>
-    <p>A simple, mindful way to manage your money and build better habits.</p>
-    <div class="buttons">
-      <a href="login.html" class="btn login">Login</a>
-      <a href="signup.html" class="btn signup">Sign Up</a>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expense Tracker Landing Page</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+</head>
+<body>
+  <header>
+    <h1>Track Your Spending,</h1>
+    <h2>Grow Your Savings</h2>
+    <p class="subtitle">A simple, mindful way to manage your money and build better habits.</p>
+    <div class="auth-buttons">
+      <a href="login.html" class="btn">Login</a>
+      <a href="signup.html" class="btn">Sign Up</a>
     </div>
   </header>
 
-  <section class="mission-vision">
-    <div class="card">
-      <h2>Mission</h2>
-      <p>Empowering individuals to take control of their personal finances through easy-to-use tools and insightful analytics.</p>
-    </div>
-    <div class="card">
-      <h2>Vision</h2>
-      <p>To create a financially aware community where every peso is spent with purpose.</p>
-    </div>
+  <section class="section mission">
+    <h3>Mission</h3>
+    <p>Empowering individuals to take control of their personal finances through easy-to-use tools and insightful analytics.</p>
   </section>
 
-  <section class="features">
-    <h2>Features</h2>
-    <div class="feature-grid">
+  <section class="section vision">
+    <h3>Vision</h3>
+    <p>To create a financially aware community where every peso is spent with purpose.</p>
+  </section>
+
+  <section class="section features">
+    <h3>Features</h3>
+    <div class="features-grid">
       <div class="feature-item">
-        <img src="icons/graph.png" alt="Graph Icon">
-        <p><strong>Yearly Graphs</strong> &<br> Monthly Breakdown</p>
+        <i class="fas fa-chart-line"></i>
+        <p><strong>Yearly Graphs</strong> & Monthly Breakdown</p>
       </div>
       <div class="feature-item">
-        <img src="icons/logging.png" alt="Logging Icon">
+        <i class="fas fa-pen"></i>
         <p><strong>Smart</strong> Expense Logging</p>
       </div>
       <div class="feature-item">
-        <img src="icons/export.png" alt="Export Icon">
+        <i class="fas fa-file-export"></i>
         <p><strong>Exportable</strong> Summary Files</p>
       </div>
     </div>
   </section>
+
+  <footer>
+    <p>&copy; 2025 Your Expense Tracker</p>
+  </footer>
 </body>
 </html>
